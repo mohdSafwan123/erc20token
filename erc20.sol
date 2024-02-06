@@ -23,4 +23,9 @@ contract MyUpdatedToken is ERC20 {
     function burnTokens(uint256 amount) external {
         _burn(msg.sender, amount);
     }
+     function transfer(address to, uint256 amount) public override returns (bool) {
+        require(amount <= balanceOf(msg.sender), "Insufficient balance");
+        _transfer(msg.sender, to, amount);
+        return true;
+    }
 }
